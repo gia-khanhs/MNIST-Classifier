@@ -106,5 +106,5 @@ def testAccuracy(W1, b1, W2, b2):
     accuracy = np.sum(predictions == mnist.test.label) / mnist.test.size
     print(f"Accuracy on test set: {accuracy}")
 
-W1, b1, W2, b2 = gradientDescent(0.3, 51)
+W1, b1, W2, b2 = gradientDescent(0.3, 301)
 testAccuracy(W1, b1, W2, b2)
