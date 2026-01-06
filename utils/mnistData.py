@@ -65,13 +65,21 @@ def readLabels(filePath):
 
     return label
 
+def _oneHotLabel(label):
+    size = len(label)
+    oneHot = np.zeros((label.max() + 1, size))
+    oneHot[label, np.arange(size)] = 1
+    return oneHot
+
 class mnist:
     class train:
         img = readImages(trainImgPath) / 255 #normalise
         label = readLabels(trainLabelPath) 
+        oneHotLabel = _oneHotLabel(label)
         size = len(label)
 
     class test:
         img = readImages(testImgPath) / 255 #normalise
         label = readLabels(testLabelPath)
+        oneHotLabel = _oneHotLabel(label)
         size = len(label)
