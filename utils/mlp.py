@@ -74,10 +74,10 @@ class mlp:
         A2 = self.softmax(Z2)
         predictions = np.argmax(A2, axis=0, keepdims=True)
         
-        return predictions
+        return predictions, A2
 
     def calcTestAccuracy(self):
-        predictions = self.predict(mnist.test.img.T)
+        predictions, A2 = self.predict(mnist.test.img.T)
         accuracy = np.sum(mnist.test.label == predictions) / mnist.test.size
 
         return accuracy
