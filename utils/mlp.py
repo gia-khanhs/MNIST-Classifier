@@ -59,6 +59,8 @@ class mlp:
         dW1, db1, dW2, db2 = self.backProp()
         self.updateParams(learningRate, dW1, db1, dW2, db2)
 
+    #=================================================================================
+
     def calcTrainAccuracy(self):
         predictions = np.argmax(self.A2, axis=0, keepdims=True)
         accuracy = np.sum(mnist.train.label == predictions) / mnist.train.size
@@ -94,3 +96,15 @@ class mlp:
         print(f"Accuracy on training set: {accuracy}")
         accuracy = self.calcTestAccuracy()
         print(f"Accuracy on test set: {accuracy}")
+
+    #=================================================================================
+
+    def saveParams(self):
+        np.savez("saves/savedParameters.npz", W1=self.W1, b1=self.b1, W2=self.W2, b2=self.b2)
+
+    def loadParams(self):
+        loadedParams = np.load("saves/savedParameters.npz")
+        self.W1 = loadedParams["W1"]
+        self.b1 = loadedParams["b1"]
+        self.W2 = loadedParams["W2"]
+        self.b2 = loadedParams["b2"]
